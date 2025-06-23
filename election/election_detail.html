@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>{{ election.title }} - Management</h2>
+  <p>{{ election.description }}</p>
+
+  <div class="mb-3 d-flex gap-2 flex-wrap">
+    <a href="{% url 'add_candidate' election.id %}" class="btn btn-outline-primary">+ Add Candidate</a>
+    <a href="{% url 'view_results' election.id %}" class="btn btn-outline-dark">View Results</a>
+    <a href="{% url 'update_election' election.id %}" class="btn btn-outline-warning">✏️ Edit Election</a>
+  </div>
+
+  <h4>Candidates:</h4>
+  <ul>
+    {% for candidate in election.candidates.all %}
+      <li>{{ candidate.name }} ({{ candidate.party }})</li>
+    {% empty %}
+      <li>No candidates yet.</li>
+    {% endfor %}
+  </ul>
+
+  <h4>Voters:</h4>
+  <ul>
+    {% for voter in election.voters.all %}
+      <li>{{ voter.name }} - {{ voter.email }} {% if voter.has_voted %}(Voted){% endif %}</li>
+    {% empty %}
+      <li>No voters yet.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

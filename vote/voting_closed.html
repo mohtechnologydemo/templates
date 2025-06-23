@@ -1,0 +1,11 @@
+<!-- templates/vote/voting_closed.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <div class="alert alert-danger text-center">
+    <h4>Voting Closed</h4>
+    <p>Sorry, the voting time for the election <strong>{{ election.title }}</strong> has ended.</p>
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Home</a>
+  </div>
+</div>
+{% endblock %}

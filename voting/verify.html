@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2>Verify Voter</h2>
+  <form method="POST" onsubmit="disableSubmit(this);">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="roll_no" class="form-label">Enrollment Number </label>
+      <input type="roll_no" class="form-control" name="roll_no" required>
+    </div>
+    <button class="btn btn-primary" type="submit">Send OTP</button>
+  </form>
+</div>
+<script>
+    function disableSubmit(form) {
+        const button = form.querySelector('button[type="submit"]');
+        button.disabled = true;
+        button.innerText = 'Sending...';
+    }
+</script>
+{% endblock %}

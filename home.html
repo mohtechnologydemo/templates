@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">All Elections</h2>
+  <div class="row">
+    {% for election in elections %}
+      <div class="col-md-6">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ election.title }}</h5>
+            <p class="card-text">{{ election.description }}</p>
+            <p><strong>Start:</strong> {{ election.start_time }} | <strong>End:</strong> {{ election.end_time }}</p>
+            {% if request.user == election.creator %}
+              <a href="{% url 'verify_voter' election.id %}" class="btn btn-outline-success">Committee Panel</a>
+              <a href="{% url 'cast_vote' election.id %}" class="btn btn-outline-primary">Voting Machine</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No elections found.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Vote for your candidate</h2>
+  <form method="POST">
+    {% csrf_token %}
+    {% for candidate in candidates %}
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="candidate_id" value="{{ candidate.id }}" id="c{{ candidate.id }}" required>
+        <label class="form-check-label" for="c{{ candidate.id }}">
+          {{ candidate.name }} ({{ candidate.party }})
+        </label>
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-success mt-3">Submit Vote</button>
+  </form>
+</div>
+{% endblock %}
